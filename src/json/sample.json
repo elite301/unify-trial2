@@ -1,0 +1,64 @@
+{
+  "teamMembers": [
+    {
+      "id": 1,
+      "status": "approved",
+      "user": {
+        "id": 1,
+        "name": "Joe",
+        "lastName": "Bloggs",
+        "phone": "",
+        "email": ""
+      },
+      "role": "Administrator"
+    },
+    {
+      "id": 2,
+      "status": "approved",
+      "user": {
+        "id": 2,
+        "name": "Sarah",
+        "lastName": "Connors",
+        "phone": "",
+        "email": ""
+      },
+      "role": "Administrator"
+    },
+    {
+      "id": 3,
+      "status": "approved",
+      "user": {
+        "id": 3,
+        "name": "Joespeh",
+        "lastName": "Bloggs",
+        "phone": "",
+        "email": ""
+      },
+      "role": "Standard"
+    },
+    {
+      "id": 4,
+      "status": "approved",
+      "user": {
+        "id": 4,
+        "name": "Mathew",
+        "lastName": "Murphy",
+        "phone": "",
+        "email": ""
+      },
+      "role": "Standard"
+    }
+  ],
+  "invites": [
+    {
+      "id": 1,
+      "phone": "+353 1234567",
+      "role": "Administrator"
+    },
+    {
+      "id": 2,
+      "phone": "+48 1234567",
+      "role": "Standard"
+    }
+  ]
+}
