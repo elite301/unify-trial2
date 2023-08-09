@@ -1,29 +1,40 @@
-import { getInvites, getTeamMembers } from "apis/users";
-import React, { createContext, useEffect, useState } from "react";
-import { Invite } from "types/Invite";
+import { useGetInvites } from "hooks/useGetInvites";
+import { useGetTeamMembers } from "hooks/useGetTeamMembers";
+import React, { createContext } from "react";
 import { UserContextType } from "types/UserContextTypes";
-import { TeamMember } from "types/UserTypes";
-
-const initialState: UserContextType = {
-  teamMembers: [],
-  invites: []
-}
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
 
 const UserProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [state, setState] = useState(initialState);
+  const {
+    data: teamMembers,
+    loading: teamMemberLoading,
+    error: teamMemberError,
+  } = useGetTeamMembers();
+  const {
+    data: invites,
+    loading: inviteLoading,
+    error: inviteError,
+  } = useGetInvites();
 
-  useEffect(() => {
-    getTeamMembers().then((data) => {
-      setState((state) => ({ ...state, teamMembers: data as TeamMember[] }));
-    });
-    getInvites().then((data) => {
-      setState((state) => ({ ...state, invites: data as Invite[] }));
-    });
-  }, []);
-
-  return <UserContext.Provider value={state}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider
+      value={{
+        administrators: {
+          teamMembers: teamMembers.filter((e) => e.role === "Administrator"),
+          invites: invites.filter((e) => e.role === "Administrator"),
+        },
+        standards: {
+          teamMembers: teamMembers.filter((e) => e.role === "Standard"),
+          invites: invites.filter((e) => e.role === "Standard"),
+        },
+        loading: teamMemberLoading || inviteLoading,
+        error: teamMemberError || inviteError
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export { UserContext, UserProvider };
