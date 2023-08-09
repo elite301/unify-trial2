@@ -1,13 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import { UserProvider } from "contexts/UserContext";
-import { Test } from "components/Test";
+import { UserAndInviteList } from "pages/UserAndInviteList";
 
 function App() {
   return (
     <UserProvider>
-      <Test />
+      <UserAndInviteList />
     </UserProvider>
   );
 }
